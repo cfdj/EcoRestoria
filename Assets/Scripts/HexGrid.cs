@@ -28,6 +28,7 @@ public class HexGrid : MonoBehaviour
     {
         map = new TileDisplay[lineLength, numLines];
         hillLocations = new List<TileDisplay>();
+        TileDisplay.hillHeight = hillHeight;
         heighestPoint = new int[2];
         rivers = new List<River>();
         GenerateGrid(0, 0);
@@ -39,16 +40,19 @@ public class HexGrid : MonoBehaviour
     //sets the height of each tile in the map, also saves the locations of the heighest point and all hills
     void setHeights()
     {
+        float Perlin;
         int currentHeight;
         int heighest= 0;
         for (int y = 0; y < numLines; y++)
         {
             for (int x = 0; x<lineLength; x++)
             {
-                //currentHeight = Mathf.RoundToInt(Mathf.PerlinNoise(x/100, y/100)*10); //currently doesn't give a wide enough range of values
-                currentHeight = Mathf.RoundToInt(Random.Range(0, 10));
-                Debug.Log("Pos: " + x+","+y+" Height:"+currentHeight);
+                Perlin = Mathf.PerlinNoise(map[x,y].transform.position.x, map[x, y].transform.position.y)*10;
+                currentHeight = Mathf.RoundToInt(Perlin); //currently doesn't give a wide enough range of values
+                //currentHeight = Mathf.RoundToInt(Random.Range(0, 10));
+                Debug.Log("Pos: " + x+","+y+" Height:"+Perlin);
                 map[x, y].setHeight(currentHeight);
+                map[x, y].setSoil(); //updating the tiles material based on height
                 if (currentHeight >= hillHeight)
                 {
                     hillLocations.Add(map[x,y]);
@@ -75,8 +79,10 @@ public class HexGrid : MonoBehaviour
     /// </summary>
     void generateTerrain()
     {
-        placeRiver(map[15, 15]);
-        placeRiver(map[40, 20]);
+        foreach (TileDisplay hill in hillLocations)
+        {
+            placeRiver(hill);
+        }
 
     }
     //will currently stop if it meets another river

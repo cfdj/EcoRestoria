@@ -50,6 +50,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d050f3d446d3ed04abebcc9c03d4db37, type: 2}
   - {fileID: 11400000, guid: 68f570afdbbb4f14a88c1fb3ef74561a, type: 2}
   - {fileID: 11400000, guid: 14ed81252de915f4f826064b03bee6cb, type: 2}
+  - {fileID: 11400000, guid: 057f38336920ceb4fab36de9dc2c143f, type: 2}
+  materials:
+  - {fileID: 2100000, guid: f084b2c98911f594391dff2c106515fa, type: 2}
+  - {fileID: 2100000, guid: 4c46b0dea9886044095b3ba494c0a5a2, type: 2}
+  - {fileID: 2100000, guid: 2742afc5e35c9e547b018f873433623a, type: 2}
+  - {fileID: 2100000, guid: d6d11a7a13fdb46428b91f3cec5db42e, type: 2}
+  - {fileID: 2100000, guid: 2090ac3eb4553a949a435c6dc348a270, type: 2}
   hexTile: {fileID: 11400000, guid: 68f570afdbbb4f14a88c1fb3ef74561a, type: 2}
 --- !u!212 &-6127282235667486884
 SpriteRenderer:
@@ -172,6 +179,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.31500003
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: f6639a363f252fa4a9d60a1ce51167bd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2742afc5e35c9e547b018f873433623a, type: 2}
     - target: {fileID: -927199367670048503, guid: f6639a363f252fa4a9d60a1ce51167bd,
         type: 3}
       propertyPath: m_Name
