@@ -7,26 +7,28 @@ public class TileDisplay : MonoBehaviour
     public List<Tile> tiles; //this is a list of all the tiles in the game, changed between by calling their individual set functions
                             //0 = city, 1 = desert, 2 = soil, 3 = water. may add dedicated edge tiles later
     public Tile hexTile;
-    private int height;
+    public int height;
     private SpriteRenderer sr;
     private TileDisplay[] neighbours = new TileDisplay[6];//going hexagonal so 0 is north, 3 is south, 5 is immediately next to north
     private Vector2 position;
+    private float heightchange = 0.1f;
     public Vector2Int mapPosition { get; set; }
     // Start is called before the first frame update
     void Start()
-    {
-        height = 0;
+    { 
         sr = gameObject.GetComponent<SpriteRenderer>();
         sr.sprite = hexTile.sprite;
     }
     public void SetPosition( Vector2 newposition)
     {
         position = newposition;
-        gameObject.transform.position = position;
+        transform.position=new Vector3(newposition.x,newposition.y,transform.position.z);
     }
-    public void SetHeight(int nheight)
+    public void setHeight(int nheight)
     {
         height = nheight;
+        //transform.localScale = new Vector3(1, 1, 1-nheight * heightchange);
+        transform.position = new Vector3(transform.position.x, transform.position.y, -nheight * heightchange);
         //call sprite update
     }
     public int GetHeight()
@@ -63,6 +65,18 @@ public class TileDisplay : MonoBehaviour
 
     }
     
+    public int GetNumNeighbours()
+    {
+        int num = 0;
+        for (int i = 0; i <5; i++)
+        {
+            if(neighbours[i] != null)
+            {
+                num++;
+            }
+        }
+        return num;
+    }
     public TileDisplay[] GetNeightbours()
     {
         return neighbours;
@@ -76,8 +90,12 @@ public class TileDisplay : MonoBehaviour
     }
     public void setRiver()
     {
-        hexTile = tiles[3];
-        changeTile();
+        if (hexTile != tiles[3])
+        {
+            setHeight(height - 1);
+            hexTile = tiles[3];
+            changeTile();
+        }
     }
     public void setSoil()
     {
@@ -93,5 +111,20 @@ public class TileDisplay : MonoBehaviour
     {
         hexTile = tiles[0];
         changeTile();
+    }
+
+    public TileDisplay getNextLowestNeighbour(List<TileDisplay> previousLowest)
+    {
+        TileDisplay lowestNeighbour = null;
+        int lowest = 999;
+        for (int i = 0; i<5; i++)
+        {
+            if ((neighbours[i].height < lowest)&& !previousLowest.Contains(neighbours[i]))
+            {
+                lowestNeighbour = neighbours[i];
+                lowest = lowestNeighbour.height;
+            }
+        }
+        return lowestNeighbour;
     }
 }

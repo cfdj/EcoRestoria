@@ -6,7 +6,7 @@ public class River : Object
 {
     [SerializeField] Tile river;
     List<TileDisplay> Segments; //the tiles present in a rive
-
+    int lowestHeight =99;
     //creates an empty river
     public River()
     {
@@ -20,6 +20,7 @@ public class River : Object
         {
             t.setRiver();
         }
+        updateLowestHeight();
     }
 
     //Should this change the tile being displayed to a river?
@@ -28,6 +29,15 @@ public class River : Object
     {
         Segments.Add(newSeg);
         newSeg.setRiver();
+        if(newSeg.GetHeight() < lowestHeight)
+        {
+            lowestHeight = newSeg.GetHeight();
+            foreach(TileDisplay t in Segments)
+            {
+                t.setHeight(lowestHeight);
+            }
+        }
+
     }
     public void AddSegments(List<TileDisplay> newSegs)
     {
@@ -36,6 +46,11 @@ public class River : Object
         {
             t.setRiver();
         }
+        updateLowestHeight();
+    }
+    public int getLowestHeight()
+    {
+        return lowestHeight;
     }
 
     public List<TileDisplay> GetSegments()
@@ -45,5 +60,19 @@ public class River : Object
     public int Getlength()
     {
         return Segments.Count;
+    }
+    void updateLowestHeight()
+    {
+        foreach(TileDisplay t in Segments)
+        {
+            if(t.GetHeight() < lowestHeight)
+            {
+                lowestHeight = t.GetHeight();
+            }
+        }
+        foreach(TileDisplay t in Segments)
+        {
+            t.setHeight(lowestHeight);
+        }
     }
 }

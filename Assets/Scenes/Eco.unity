@@ -172,7 +172,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 10.739271
   m_Depth: -1
   m_CullingMask:
@@ -196,13 +196,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77041979}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.93, y: -10.21, z: -10}
+  m_LocalRotation: {x: -0.15399699, y: -0, z: -0, w: 0.9880713}
+  m_LocalPosition: {x: 12.03, y: -17.56, z: -17.73}
   m_LocalScale: {x: 2.175, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -17.717001, y: 0, z: 0}
 --- !u!1 &777430697
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,27 +263,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -6127282235667486884, guid: b5cb0ae83885ad3479e40d744bb7ce1d,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b0bc5994f4694c7448c9903d2b669c0e,
-        type: 3}
-    - target: {fileID: -6127282235667486884, guid: b5cb0ae83885ad3479e40d744bb7ce1d,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 6.4
-      objectReference: {fileID: 0}
-    - target: {fileID: -6127282235667486884, guid: b5cb0ae83885ad3479e40d744bb7ce1d,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 6.2
-      objectReference: {fileID: 0}
-    - target: {fileID: -6127282235667486884, guid: b5cb0ae83885ad3479e40d744bb7ce1d,
-        type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2171994932874983737, guid: b5cb0ae83885ad3479e40d744bb7ce1d,
         type: 3}
       propertyPath: m_Name

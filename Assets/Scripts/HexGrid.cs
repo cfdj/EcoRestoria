@@ -48,10 +48,9 @@ public class HexGrid : MonoBehaviour
                 //currentHeight = Mathf.RoundToInt(Mathf.PerlinNoise(x/100, y/100)*10); //currently doesn't give a wide enough range of values
                 currentHeight = Mathf.RoundToInt(Random.Range(0, 10));
                 Debug.Log("Pos: " + x+","+y+" Height:"+currentHeight);
-                map[x, y].SetHeight(currentHeight);
+                map[x, y].setHeight(currentHeight);
                 if (currentHeight >= hillHeight)
                 {
-                    
                     hillLocations.Add(map[x,y]);
                 }
                 if (currentHeight > heighest)
@@ -69,19 +68,15 @@ public class HexGrid : MonoBehaviour
     /// <summary>
     /// Generates terrains based on geographical processes
     /// Currently generates:
-    ///     Rivers: From the hills via the a greedy shortest path
+    ///     Rivers: 
     ///     Deserts: form in the rain shadow of sufficiently high hills
     ///     
     ///     Cities: Generate a random number of cities
     /// </summary>
     void generateTerrain()
     {
-        foreach (TileDisplay hill in hillLocations) {
-            if (hill.hexTile.name != "Water") //checking its not already a river
-            {
-                placeRiver(hill);
-            }
-        }
+        placeRiver(map[15, 15]);
+        placeRiver(map[40, 20]);
 
     }
     //will currently stop if it meets another river
@@ -92,10 +87,8 @@ public class HexGrid : MonoBehaviour
         TileDisplay currentLowest = null;
         List<TileDisplay> inRoute = new List<TileDisplay>();
         TileDisplay[] toCheck;
-        int lowest = 999; //initialised far larger than any real height
         int loops = 0;
         bool done = false;
-
         //this check is being done to reduce the number of rivers
         toCheck = next.GetNeightbours();
         for(int i = 0; i< 5; i++)
@@ -117,33 +110,25 @@ public class HexGrid : MonoBehaviour
                 Debug.Log("Infinite looped");
                 break;
             }
-            toCheck = next.GetNeightbours();
-            for (int i = 0; ((i <5) &&(!done)); i++)
+            if (next.getNextLowestNeighbour(inRoute) != null)
             {
-                if (toCheck[i]!= null ) 
-                {
-                    if(toCheck[i].name != "Water")
-                    {
-                        if (toCheck[i].GetHeight() < lowest &&!inRoute.Contains(toCheck[i]))
-                        {
-                            currentLowest = toCheck[i];
-                            lowest = currentLowest.GetHeight();
-                        }
-                    }
-                    else {
-                        done = true;
-                    }
-                }
-                else //if the river has hit an edge or another river, stop
+                currentLowest = next.getNextLowestNeighbour(inRoute);
+                if(currentLowest.name == "Water")
                 {
                     done = true;
                 }
-
+                if (currentLowest.GetNumNeighbours() < 5)
+                {
+                    done = true;
+                }
+            }
+            else //if stuck, backtrack
+            {
+                currentLowest = inRoute[inRoute.Count - 1];
             }
             if(currentLowest != null)
             {
                 inRoute.Add(currentLowest);
-                lowest = 999;
                 next = currentLowest;
             }
         }
