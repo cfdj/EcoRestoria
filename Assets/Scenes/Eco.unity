@@ -197,7 +197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77041979}
   m_LocalRotation: {x: -0.15399699, y: -0, z: -0, w: 0.9880713}
-  m_LocalPosition: {x: 11.6, y: 2, z: -17}
+  m_LocalPosition: {x: 12.24, y: -16.38, z: -19.57}
   m_LocalScale: {x: 2.175, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -231,7 +231,7 @@ Light:
   serializedVersion: 9
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.3
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -326,9 +326,9 @@ MonoBehaviour:
   lineLength: 50
   numLines: 30
   offSet: 0
-  xchange: 0.48
-  ychange: 0.32
-  linechange: 0.64
+  xchange: 0.5
+  ychange: -0.34
+  linechange: -0.65
   tileBase: {fileID: 6648009093857913932, guid: b5cb0ae83885ad3479e40d744bb7ce1d,
     type: 3}
   prevailingWind: 0

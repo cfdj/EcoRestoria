@@ -22,6 +22,7 @@ public class TileDisplay : MonoBehaviour
         sr = gameObject.GetComponent<SpriteRenderer>();
         sr.sprite = hexTile.sprite;
         sr.material = hexTile.material;
+        
     }
     public void SetPosition( Vector2 newposition)
     {
