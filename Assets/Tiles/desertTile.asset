@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Desert
   sprite: {fileID: 21300000, guid: efc544c21e0b79d4687b7be26100c02f, type: 3}
   contents: {fileID: 0}
-  height: 0
+  material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

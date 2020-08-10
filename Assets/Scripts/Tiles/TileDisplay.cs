@@ -21,6 +21,7 @@ public class TileDisplay : MonoBehaviour
     { 
         sr = gameObject.GetComponent<SpriteRenderer>();
         sr.sprite = hexTile.sprite;
+        sr.material = hexTile.material;
     }
     public void SetPosition( Vector2 newposition)
     {
@@ -90,6 +91,7 @@ public class TileDisplay : MonoBehaviour
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
         sr.sprite = hexTile.sprite;
+        sr.material = hexTile.material;
         hexagon = gameObject.GetComponentInChildren<MeshRenderer>();
         hexagon.material = materials[tileNum];
     }

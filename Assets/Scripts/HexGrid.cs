@@ -6,6 +6,7 @@ public class HexGrid : MonoBehaviour
 {
     [SerializeField] int lineLength;
     [SerializeField] int numLines;
+    [SerializeField] float offSet;
 
     [SerializeField] float xchange;
     [SerializeField] float ychange;
@@ -26,6 +27,7 @@ public class HexGrid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        offSet = Random.Range(0, 100);
         map = new TileDisplay[lineLength, numLines];
         hillLocations = new List<TileDisplay>();
         TileDisplay.hillHeight = hillHeight;
@@ -47,7 +49,8 @@ public class HexGrid : MonoBehaviour
         {
             for (int x = 0; x<lineLength; x++)
             {
-                Perlin = Mathf.PerlinNoise(map[x,y].transform.position.x, map[x, y].transform.position.y)*10;
+                //now adds a random offset
+                Perlin = Mathf.PerlinNoise(map[x,y].transform.position.x*offSet, map[x, y].transform.position.y*offSet)*10;
                 currentHeight = Mathf.RoundToInt(Perlin); //currently doesn't give a wide enough range of values
                 //currentHeight = Mathf.RoundToInt(Random.Range(0, 10));
                 Debug.Log("Pos: " + x+","+y+" Height:"+Perlin);
