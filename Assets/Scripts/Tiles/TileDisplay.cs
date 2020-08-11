@@ -95,6 +95,7 @@ public class TileDisplay : MonoBehaviour
         sr.material = hexTile.material;
         hexagon = gameObject.GetComponentInChildren<MeshRenderer>();
         hexagon.material = materials[tileNum];
+        
     }
     public void setRiver()
     {
