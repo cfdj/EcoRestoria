@@ -38,7 +38,10 @@ public class HexGrid : MonoBehaviour
         setHeights();
         generateTerrain();
     }
-
+    public TileDisplay getTile(int x, int y)
+    {
+        return map[x, y];
+    }
     //sets the height of each tile in the map, also saves the locations of the heighest point and all hills
     void setHeights()
     {
@@ -84,7 +87,24 @@ public class HexGrid : MonoBehaviour
     {
         foreach (TileDisplay hill in hillLocations)
         {
+            hillSmooth(hill);
             placeRiver(hill);
+        }
+
+    }
+    //hills currently look too spikey, so moving their neighbours to be a similar height
+    void hillSmooth(TileDisplay hill)
+    {
+        List<TileDisplay> neighbours = new List<TileDisplay>( hill.GetNeightbours());
+        foreach(TileDisplay t in neighbours)
+        {
+            if (t != null)
+            {
+                if (t.GetHeight() < hill.GetHeight())
+                {
+                    t.setHeight(hill.GetHeight() - 1);
+                }
+            }
         }
 
     }

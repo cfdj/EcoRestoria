@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TileDisplay : MonoBehaviour
 {
+    [SerializeField] static HexMove player;
     public List<Tile> tiles; //this is a list of all the tiles in the game, changed between by calling their individual set functions
                              //0 = city, 1 = desert, 2 = soil, 3 = water. may add dedicated edge tiles later
     public List<Material> materials;
@@ -18,7 +19,8 @@ public class TileDisplay : MonoBehaviour
     public Vector2Int mapPosition { get; set; }
     // Start is called before the first frame update
     void Start()
-    { 
+    {
+        player = FindObjectOfType<HexMove>();
         sr = gameObject.GetComponent<SpriteRenderer>();
         sr.sprite = hexTile.sprite;
         sr.material = hexTile.material;
@@ -146,5 +148,10 @@ public class TileDisplay : MonoBehaviour
             }
         }
         return lowestNeighbour;
+    }
+    public void OnMouseDown()
+    {
+        Debug.Log("Started moving");
+        player.Move(this);
     }
 }
